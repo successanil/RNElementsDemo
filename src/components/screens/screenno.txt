@@ -1,0 +1,15 @@
+
+
+hp(2.4) = 14
+hp(1.6) = 10
+hp(1.8) = 12
+
+
+
+// food ordering 
+splash = 201  // later to be done
+notification = 
+
+// execution command
+
+npm run ios -- --simulator='iPad Pro (9.7-inch)'
