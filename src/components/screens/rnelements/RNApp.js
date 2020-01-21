@@ -25,6 +25,7 @@ import {
 } from '../../../actions/index';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon5 from 'react-native-vector-icons/FontAwesome5';
 
 class RNApp extends Component {
   constructor(props) {
@@ -187,7 +188,7 @@ class RNApp extends Component {
           justifyContent: 'flex-end',
         }}>
         <Button
-          icon={<Icon name="check" size={Dimens.hpTwo} color="white" />}
+          icon={<Icon name="check" size={Dimens.hpThreePointFive} color="white" />}
           title=""
           buttonStyle={{
             backgroundColor: '#53A221',
@@ -198,6 +199,43 @@ class RNApp extends Component {
         />
       </View>
     );
+  }
+
+  addAvailablityPeriod(){
+      return(
+        <View
+        style={{
+          marginBottom: Dimens.hpTwo,
+          marginTop: Dimens.hpTwo,
+          flex1: 1,
+          flexDirection: 'row',
+          height: Dimens.hpFour,
+        }}>
+        <View style={{flex: 1,flexDirection:'column'}}>
+          <Text>Availability Period</Text>
+        </View>
+        <View style={{flexDirection: 'row', flex: 1.5}}>
+        <Icon5 name="calendar-alt" size={Dimens.hpThree} color="#8AC1B2" />
+          <Input
+            placeholder="BA"
+            containerStyle={{
+              backgroundColor: '#F1F1F1',
+              flex: 1,
+              height:Dimens.hpThree,
+              borderRadius: Dimens.wpTwo,
+            }}
+            inputContainerStyle={{
+              borderBottomWidth: 0,
+              backgroundColor: '#F1F1F1',
+              height:Dimens.hpThree,
+              borderRadius: Dimens.wpTwo,
+            }}
+          />
+          <Icon5 name="calendar-alt" size={Dimens.hpThree} color="#8AC1B2" />
+        </View>
+        <View style={{flex:1,flexDirection:'row'}}></View>
+      </View>
+      );
   }
 
   displayNormalLayout() {
@@ -298,35 +336,7 @@ class RNApp extends Component {
                   <Text>Price after discount</Text>
                 </View>
               </View>
-              <View
-                style={{
-                  marginBottom: Dimens.hpTwo,
-                  marginTop: Dimens.hpTwo,
-                  flex1: 1,
-                  flexDirection: 'row',
-                  height: 50,
-                }}>
-                <View style={{flex: 1}}>
-                  <Text>Availability Period</Text>
-                </View>
-                <View style={{flexDirection: 'row', flex: 1}}>
-                  <Button title="-" containerStyle={{flex: 1}} />
-                  <Input
-                    placeholder="BA"
-                    containerStyle={{
-                      backgroundColor: '#F1F1F1',
-                      flex: 1,
-                      borderRadius: Dimens.wpTwo,
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      backgroundColor: '#F1F1F1',
-                      borderRadius: Dimens.wpTwo,
-                    }}
-                  />
-                  <Button title="+" containerStyle={{flex: 1}} />
-                </View>
-              </View>
+              {this.addAvailablityPeriod()}
               {this.addRightButton()}
             </View>
           </View>
