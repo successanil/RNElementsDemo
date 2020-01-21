@@ -28,7 +28,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon5 from 'react-native-vector-icons/FontAwesome5';
 
-
 class RNApp extends Component {
   constructor(props) {
     super(props);
@@ -162,26 +161,29 @@ class RNApp extends Component {
 
   addUploadButton() {
     return (
-        <View style={{
-            alignItems: 'center',
-          }}>
       <View
         style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
+          alignItems: 'center',
         }}>
-        <Button
-          icon={<Icon name="cloud-upload" size={Dimens.hpFive} color="white" />}
-          title=""
-          buttonStyle={{
-            backgroundColor: '#E49B54',
-            width: Dimens.hpTen,
-            height: Dimens.hpTen,
-            borderRadius: Dimens.hpTen / 2,
-          }}
-        />
-      </View>
-      <Text style={{color:'#E49B54'}}>Upload image</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}>
+          <Button
+            icon={
+              <Icon name="cloud-upload" size={Dimens.hpFive} color="white" />
+            }
+            title=""
+            buttonStyle={{
+              backgroundColor: '#E49B54',
+              width: Dimens.hpTen,
+              height: Dimens.hpTen,
+              borderRadius: Dimens.hpTen / 2,
+            }}
+          />
+        </View>
+        <Text style={{color: '#E49B54'}}>Upload image</Text>
       </View>
     );
   }
@@ -233,55 +235,144 @@ class RNApp extends Component {
     );
   }
 
-  addAvailableQuantity(){
-      return(
-        <View
+  addAvailableQuantity() {
+    return (
+      <View
         style={{
           flex1: 1,
           flexDirection: 'row',
           height: Dimens.hpFour,
           marginBottom: Dimens.hpTwo,
           marginTop: Dimens.hpTwo,
-          justifyContent:'center',
-          alignItems:'center'
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
         <View style={{flex: 1}}>
           <Text>Available Quantity</Text>
         </View>
         <View style={{flexDirection: 'row', flex: 1}}>
-        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-        <Icon1 name="minus" size={Dimens.hpThree} color="#969696" />
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Icon1 name="minus" size={Dimens.hpThree} color="#969696" />
+          </View>
+          <View style={{flex: 1}}>
+            <Input
+              placeholder="12"
+              placeholderTextColor="#000"
+              maxLength={2}
+              textAlign={'center'}
+              color={'#000'}
+              containerStyle={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#F1F1F1',
+                borderRadius: Dimens.wpTwo,
+              }}
+              inputContainerStyle={{
+                borderBottomWidth: 0,
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: '#F1F1F1',
+                borderRadius: Dimens.wpTwo,
+                placeholderStyle: {color: '#000'},
+              }}
+            />
+          </View>
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Icon1 name="plus" size={Dimens.hpThree} color="#969696" />
+          </View>
         </View>
-        <View style={{flex:1}}>
+      </View>
+    );
+  }
+
+  addInitialPriceLayout() {
+    return (
+      <View
+        style={{
+          marginBottom: Dimens.hpTwo,
+          marginTop: Dimens.hpTwo,
+          flex1: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+        }}>
+        <View style={{flex: 1}}>
+          <Text>Initial Price</Text>
           <Input
-            placeholder="12"
-            placeholderTextColor = "#000"
-            maxLength={2}
-            textAlign={'center'}
-            color={'#000'}
+            placeholder="BA"
             containerStyle={{
-              justifyContent:'center',
-              alignItems:'center',
               backgroundColor: '#F1F1F1',
+              flex: 1,
               borderRadius: Dimens.wpTwo,
             }}
             inputContainerStyle={{
               borderBottomWidth: 0,
-              justifyContent:'center',
-              alignItems:'center',
-              color: '#F1F1F1',
+              backgroundColor: '#F1F1F1',
               borderRadius: Dimens.wpTwo,
-              placeholderStyle:{color:'#000'}
             }}
           />
-          </View>
-          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-          <Icon1 name="plus" size={Dimens.hpThree} color="#969696" />
-          </View>
         </View>
+        <View style={{flexDirection: 'row', flex: 1}}>
+          <Icon1 name="minus" size={Dimens.hpThree} color="#969696" />
+          <Input
+            placeholder="BA"
+            containerStyle={{
+              backgroundColor: '#F1F1F1',
+              flex: 1,
+              borderRadius: Dimens.wpTwo,
+            }}
+            inputContainerStyle={{
+              borderBottomWidth: 0,
+              backgroundColor: '#F1F1F1',
+              borderRadius: Dimens.wpTwo,
+            }}
+          />
+          <Icon1 name="plus" size={Dimens.hpThree} color="#969696" />
+        </View>
+        <View style={{flex: 1}}>
+          <Text>Price after discount</Text>
+          <Input
+            placeholder="BA"
+            containerStyle={{
+              backgroundColor: '#F1F1F1',
+              flex: 1,
+              borderRadius: Dimens.wpTwo,
+            }}
+            inputContainerStyle={{
+              borderBottomWidth: 0,
+              backgroundColor: '#F1F1F1',
+              borderRadius: Dimens.wpTwo,
+            }}
+          />
+        </View>
+      </View>
+    );
+  }
+
+  addDescriptionLayout(){
+      return (
+        <View>
+        <Text style={{fontSize: Dimens.hpOnePointThree}}>
+          Description
+        </Text>
+        <Input
+          placeholder=""
+          containerStyle={{
+            backgroundColor: '#F1F1F1',
+            borderRadius: Dimens.wpTwo,
+          }}
+          inputContainerStyle={{
+            borderBottomWidth: 0,
+            backgroundColor: '#F1F1F1',
+            borderRadius: Dimens.wpTwo,
+          }}
+        />
       </View>
       );
   }
+
 
   displayNormalLayout() {
     return (
@@ -306,53 +397,8 @@ class RNApp extends Component {
               {this.addArticleName()}
               {this.addUploadButton()}
               {this.addAvailableQuantity()}
-              <View>
-                <Text style={{fontSize:Dimens.hpOnePointThree}} >Description</Text>
-                <Input
-                  placeholder=""
-                  containerStyle={{
-                    backgroundColor: '#F1F1F1',
-                    borderRadius: Dimens.wpTwo,
-                  }}
-                  inputContainerStyle={{
-                    borderBottomWidth: 0,
-                    backgroundColor: '#F1F1F1',
-                    borderRadius: Dimens.wpTwo,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  marginBottom: Dimens.hpTwo,
-                  marginTop: Dimens.hpTwo,
-                  flex1: 1,
-                  flexDirection: 'row',
-                  height: 50,
-                }}>
-                <View style={{flex: 1}}>
-                  <Text>Initial Price</Text>
-                </View>
-                <View style={{flexDirection: 'row', flex: 1}}>
-                  <Button title="-" containerStyle={{flex: 1}} />
-                  <Input
-                    placeholder="BA"
-                    containerStyle={{
-                      backgroundColor: '#F1F1F1',
-                      flex: 1,
-                      borderRadius: Dimens.wpTwo,
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      backgroundColor: '#F1F1F1',
-                      borderRadius: Dimens.wpTwo,
-                    }}
-                  />
-                  <Button title="+" containerStyle={{flex: 1}} />
-                </View>
-                <View style={{flex: 1}}>
-                  <Text>Price after discount</Text>
-                </View>
-              </View>
+              {this.addDescriptionLayout()}
+              {this.addInitialPriceLayout()}
               {this.addAvailablityPeriod()}
               {this.addRightButton()}
             </View>
