@@ -27,6 +27,7 @@ import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon5 from 'react-native-vector-icons/FontAwesome5';
 import Autocomplete from 'react-native-autocomplete-input';
 
+
 const API = 'https://swapi.co/api';
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 class RNApp extends Component {
