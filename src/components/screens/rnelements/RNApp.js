@@ -12,6 +12,7 @@ import PrintUtils from '../../../utils/PrintUtils';
 import networkUtils from '../../../utils/NetworkUtils';
 
 import Dimens from '../../../utils/Dimens';
+import AppFonts from '../../../utils/AppFonts';
 
 import {Button, Text, Input} from 'react-native-elements';
 
@@ -200,7 +201,7 @@ class RNApp extends Component {
         }}>
         <Button
           icon={
-            <Icon name="check" size={Dimens.hpThreePointFive} color="white" />
+            <Icon name="check" size={Dimens.hpTwo} color="white" />
           }
           title=""
           buttonStyle={{

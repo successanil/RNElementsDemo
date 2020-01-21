@@ -26,6 +26,7 @@ const Dimens = {
   wpEight: wp('8%'),
   hpThree: hp('3%'),
   hpTwoPointFive: hp('2.5%'),
+  hpOnePointFour: hp('1.4%'),
   hpOnePointFive: hp('1.5%'),
   hpOnePointSix: hp('1.6%'),
   hpOnePointSeven: hp('1.7%'),
