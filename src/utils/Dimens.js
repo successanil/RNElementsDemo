@@ -14,6 +14,7 @@ const Dimens = {
   wpThreePointFive: wp('3.5%'),
   wpSix: wp('6%'),
   wpTen: wp('10%'),
+  hpOne:hp('1%'),
   hpTwo: hp('2%'),
   wpFour: wp('4%'),
   wpFive: wp('5%'),
@@ -32,6 +33,12 @@ const Dimens = {
   hpThree: hp('3%'),
   hpFour: hp('4%'),
   hpFive: hp('5%'),
+  hpSix: hp('6%'),
+  hpSeven: hp('7%'),
+  hpEight: hp('8%'),
+  hpNine: hp('9%'),
+  hpTen: hp('10%'),
+  hpElevent: hp('11%'),
 };
 
 if (Platform.isPad) {

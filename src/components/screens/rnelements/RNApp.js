@@ -24,6 +24,8 @@ import {
   addNotificationOffersHeadersForCustomerDataList,
 } from '../../../actions/index';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 class RNApp extends Component {
   constructor(props) {
     super(props);
@@ -57,12 +59,9 @@ class RNApp extends Component {
     this.props.addNotificationTitleDataList(dataSource);
 
     this.state = {
-      displayHeader: 'flex',
       displaySV: 'flex',
       displayLayout: 0,
       modalVisible: false,
-      selectedTab: 0,
-      notificationTitleArr: dataSource,
     };
   }
 
@@ -104,6 +103,81 @@ class RNApp extends Component {
     return <View style={{height: '100%'}}>{this.displayMiddleLayout()}</View>;
   }
 
+  addAdTitleView() {
+    return (
+      <View style={{flex: 1}}>
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <Text>Ad Title</Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            borderWidth: 1,
+            marginBottom: Dimens.hpTwo,
+          }}></View>
+
+        <Input
+          placeholder="BASIC INPUT"
+          containerStyle={{
+            backgroundColor: '#F1F1F1',
+            borderRadius: Dimens.wpTwo,
+          }}
+          inputContainerStyle={{
+            borderBottomWidth: 0,
+            backgroundColor: '#F1F1F1',
+            borderRadius: Dimens.wpTwo,
+          }}
+        />
+      </View>
+    );
+  }
+
+  addArticleName() {
+    return (
+      <View>
+        <View
+          style={{
+            marginTop: Dimens.hpTwo,
+          }}
+        />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}>
+          <Text>Article Name</Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            borderWidth: 1,
+            marginBottom: Dimens.hpTwo,
+          }}></View>
+      </View>
+    );
+  }
+
+  addUploadButton() {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+        <Button
+          icon={<Icon name="cloud-upload" size={Dimens.hpFive} color="white" />}
+          title=""
+          buttonStyle={{
+              backgroundColor:'#E49B54',
+              width:Dimens.hpTen,
+              height:Dimens.hpTen,
+              borderRadius:(Dimens.hpTen / 2)
+          }}
+        />
+      </View>
+    );
+  }
+
   displayNormalLayout() {
     return (
       <View style={{flex: 1}}>
@@ -119,56 +193,13 @@ class RNApp extends Component {
                 justifyContent: 'flex-start',
                 padding: Dimens.wpFive,
               }}>
-              <View style={{marginTop: 50}}></View>
-              <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                <Text>Ad Title</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  borderWidth: 1,
-                  marginBottom: Dimens.hpTwo,
-                }}></View>
+              <View style={{marginTop: Dimens.hpFour}}></View>
+              {this.addAdTitleView()}
 
-              <Input
-                placeholder="BASIC INPUT"
-                containerStyle={{
-                  backgroundColor: '#F1F1F1',
-                  borderRadius: Dimens.wpTwo,
-                }}
-                inputContainerStyle={{
-                  borderBottomWidth: 0,
-                  backgroundColor: '#F1F1F1',
-                  borderRadius: Dimens.wpTwo,
-                }}
-              />
+              <View style={{marginTop: Dimens.hpSeven}}></View>
 
-              <View
-                style={{
-                  marginTop: Dimens.hpFive,
-                }}
-              />
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                }}>
-                <Text>Article Name</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  borderWidth: 1,
-                  marginBottom: Dimens.hpTwo,
-                }}></View>
-
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                }}>
-                <Button title="Upload" />
-              </View>
+              {this.addArticleName()}
+              {this.addUploadButton()}
               <View
                 style={{
                   flex1: 1,
