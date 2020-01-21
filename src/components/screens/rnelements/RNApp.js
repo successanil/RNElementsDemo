@@ -252,7 +252,7 @@ class RNApp extends Component {
           title=""
           ViewComponent={LinearGradient}
           linearGradientProps={{
-            colors: ['#53746B', '#53A221'],
+            colors: ['#53A221', '#53A221'],
             start: {x: 0, y: 0.5},
             end: {x: 1, y: 0.5},
           }}
@@ -315,12 +315,12 @@ class RNApp extends Component {
         <View style={{flex: 1}}>
           <Text>Available Quantity</Text>
         </View>
-        <View style={{flexDirection: 'row', flex: 1}}>
+        <View style={{flexDirection: 'row', flex: 1,alignItems:'flex-end'}}>
           <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            style={{flex: 1, justifyContent: 'center',alignItems:'flex-end',marginRight:10}}>
             <Icon1 name="minus" size={Dimens.hpThree} color="#969696" />
           </View>
-          <View style={{flex: 1}}>
+          <View style={{flex: 0.8,justifyContent:'center',alignItems:'flex-end'}}>
             <Input
               placeholder="12"
               placeholderTextColor="#000"
@@ -330,6 +330,7 @@ class RNApp extends Component {
               containerStyle={{
                 justifyContent: 'center',
                 alignItems: 'center',
+                flex:1,
                 backgroundColor: '#F1F1F1',
                 borderRadius: Dimens.wpTwo,
               }}
@@ -344,7 +345,7 @@ class RNApp extends Component {
             />
           </View>
           <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            style={{flex: 0.5, justifyContent: 'center', alignItems:'flex-end'}}>
             <Icon1 name="plus" size={Dimens.hpThree} color="#969696" />
           </View>
         </View>
