@@ -25,7 +25,9 @@ import {
 } from '../../../actions/index';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon5 from 'react-native-vector-icons/FontAwesome5';
+
 
 class RNApp extends Component {
   constructor(props) {
@@ -160,6 +162,9 @@ class RNApp extends Component {
 
   addUploadButton() {
     return (
+        <View style={{
+            alignItems: 'center',
+          }}>
       <View
         style={{
           flexDirection: 'row',
@@ -176,6 +181,8 @@ class RNApp extends Component {
           }}
         />
       </View>
+      <Text style={{color:'#E49B54'}}>Upload image</Text>
+      </View>
     );
   }
 
@@ -188,7 +195,9 @@ class RNApp extends Component {
           justifyContent: 'flex-end',
         }}>
         <Button
-          icon={<Icon name="check" size={Dimens.hpThreePointFive} color="white" />}
+          icon={
+            <Icon name="check" size={Dimens.hpThreePointFive} color="white" />
+          }
           title=""
           buttonStyle={{
             backgroundColor: '#53A221',
@@ -201,9 +210,9 @@ class RNApp extends Component {
     );
   }
 
-  addAvailablityPeriod(){
-      return(
-        <View
+  addAvailablityPeriod() {
+    return (
+      <View
         style={{
           marginBottom: Dimens.hpTwo,
           marginTop: Dimens.hpTwo,
@@ -211,29 +220,65 @@ class RNApp extends Component {
           flexDirection: 'row',
           height: Dimens.hpFour,
         }}>
-        <View style={{flex: 1,flexDirection:'column'}}>
+        <View style={{flex: 1, flexDirection: 'column'}}>
           <Text>Availability Period</Text>
         </View>
         <View style={{flexDirection: 'row', flex: 1.5}}>
-        <Icon5 name="calendar-alt" size={Dimens.hpThree} color="#8AC1B2" />
+          <Icon5 name="calendar-alt" size={Dimens.hpThree} color="#8AC1B2" />
+          <Text>to</Text>
+          <Icon5 name="calendar-alt" size={Dimens.hpThree} color="#8AC1B2" />
+        </View>
+        <View style={{flex: 1, flexDirection: 'row'}}></View>
+      </View>
+    );
+  }
+
+  addAvailableQuantity(){
+      return(
+        <View
+        style={{
+          flex1: 1,
+          flexDirection: 'row',
+          height: Dimens.hpFour,
+          marginBottom: Dimens.hpTwo,
+          marginTop: Dimens.hpTwo,
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+        <View style={{flex: 1}}>
+          <Text>Available Quantity</Text>
+        </View>
+        <View style={{flexDirection: 'row', flex: 1}}>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+        <Icon1 name="minus" size={Dimens.hpThree} color="#969696" />
+        </View>
+        <View style={{flex:1}}>
           <Input
-            placeholder="BA"
+            placeholder="12"
+            placeholderTextColor = "#000"
+            maxLength={2}
+            textAlign={'center'}
+            color={'#000'}
             containerStyle={{
+              justifyContent:'center',
+              alignItems:'center',
               backgroundColor: '#F1F1F1',
-              flex: 1,
-              height:Dimens.hpThree,
               borderRadius: Dimens.wpTwo,
             }}
             inputContainerStyle={{
               borderBottomWidth: 0,
-              backgroundColor: '#F1F1F1',
-              height:Dimens.hpThree,
+              justifyContent:'center',
+              alignItems:'center',
+              color: '#F1F1F1',
               borderRadius: Dimens.wpTwo,
+              placeholderStyle:{color:'#000'}
             }}
           />
-          <Icon5 name="calendar-alt" size={Dimens.hpThree} color="#8AC1B2" />
+          </View>
+          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+          <Icon1 name="plus" size={Dimens.hpThree} color="#969696" />
+          </View>
         </View>
-        <View style={{flex:1,flexDirection:'row'}}></View>
       </View>
       );
   }
@@ -260,37 +305,9 @@ class RNApp extends Component {
 
               {this.addArticleName()}
               {this.addUploadButton()}
-              <View
-                style={{
-                  flex1: 1,
-                  flexDirection: 'row',
-                  height: Dimens.hpFour,
-                  marginBottom: Dimens.hpTwo,
-                  marginTop: Dimens.hpTwo,
-                }}>
-                <View style={{flex: 1}}>
-                  <Text>Available Quantity</Text>
-                </View>
-                <View style={{flexDirection: 'row', flex: 1}}>
-                  <Button title="-" containerStyle={{flex: 1}} />
-                  <Input
-                    placeholder="BA"
-                    containerStyle={{
-                      backgroundColor: '#F1F1F1',
-                      flex: 1,
-                      borderRadius: Dimens.wpTwo,
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      backgroundColor: '#F1F1F1',
-                      borderRadius: Dimens.wpTwo,
-                    }}
-                  />
-                  <Button title="+" containerStyle={{flex: 1}} />
-                </View>
-              </View>
+              {this.addAvailableQuantity()}
               <View>
-                <Text>Description</Text>
+                <Text style={{fontSize:Dimens.hpOnePointThree}} >Description</Text>
                 <Input
                   placeholder=""
                   containerStyle={{
