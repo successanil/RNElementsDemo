@@ -114,12 +114,13 @@ class RNApp extends Component {
         <View
           style={{
             flexDirection: 'row',
-            borderWidth: 1,
-            marginBottom: Dimens.hpTwo,
+            borderColor:'#999999',
+            borderWidth: Dimens.hpPointOne,
+            marginBottom: Dimens.hpSeven,
           }}></View>
 
         <Input
-          placeholder="BASIC INPUT"
+          placeholder=""
           containerStyle={{
             backgroundColor: '#F1F1F1',
             borderRadius: Dimens.wpTwo,
@@ -152,7 +153,8 @@ class RNApp extends Component {
         <View
           style={{
             flexDirection: 'row',
-            borderWidth: 1,
+            borderColor:'#999999',
+            borderWidth: Dimens.hpPointOne,
             marginBottom: Dimens.hpTwo,
           }}></View>
       </View>
