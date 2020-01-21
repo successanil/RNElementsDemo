@@ -271,13 +271,16 @@ class RNApp extends Component {
           flex1: 1,
           flexDirection: 'row',
           height: Dimens.hpFour,
+          alignItems:'center',
+          justifyContent:'center',
+          height:Dimens.hpFive
         }}>
         <View style={{flex: 1, flexDirection: 'column'}}>
           <Text>Availability Period</Text>
         </View>
-        <View style={{flexDirection: 'row', flex: 1.5}}>
+        <View style={{flexDirection: 'row', flex: 1.5,alignItems:'center',justifyContent:'center'}}>
           <Icon5 name="calendar-alt" size={Dimens.hpThree} color="#8AC1B2" />
-          <Text>to</Text>
+          <Text style={{marginLeft:Dimens.hpOne,marginRight:Dimens.hpOne}}>to</Text>
           <Icon5 name="calendar-alt" size={Dimens.hpThree} color="#8AC1B2" />
         </View>
         <View style={{flex: 1, flexDirection: 'row'}}></View>
