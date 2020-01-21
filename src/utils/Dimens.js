@@ -30,6 +30,8 @@ const Dimens = {
   hpPointOne: hp('0.1%'),
   hpTwoPointFour: hp('2.4%'),
   hpThree: hp('3%'),
+  hpFour: hp('4%'),
+  hpFive: hp('5%'),
 };
 
 if (Platform.isPad) {
