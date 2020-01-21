@@ -123,7 +123,7 @@ class RNApp extends Component {
           style={{
             flexDirection: 'row',
             borderColor:'#999999',
-            borderWidth: Dimens.hpPointOne,
+            borderWidth: Dimens.hpPointZeroEight,
             marginBottom: Dimens.hpSeven,
           }}></View>
         <Autocomplete
@@ -199,7 +199,7 @@ class RNApp extends Component {
           style={{
             flexDirection: 'row',
             borderColor:'#999999',
-            borderWidth: Dimens.hpPointOne,
+            borderWidth: Dimens.hpPointZeroEight,
             marginBottom: Dimens.hpTwo,
           }}></View>
       </View>
@@ -251,6 +251,12 @@ class RNApp extends Component {
             <Icon name="check" size={Dimens.hpTwo} color="white" />
           }
           title=""
+          ViewComponent={LinearGradient} 
+          linearGradientProps={{
+    colors: ['red', 'pink'],
+    start: { x: 0, y: 0.5 },
+    end: { x: 1, y: 0.5 },
+  }}
           buttonStyle={{
             backgroundColor: '#53A221',
             width: Dimens.hpFive,
@@ -270,7 +276,6 @@ class RNApp extends Component {
           marginTop: Dimens.hpTwo,
           flex1: 1,
           flexDirection: 'row',
-          height: Dimens.hpFour,
           alignItems:'center',
           justifyContent:'center',
           height:Dimens.hpFive
@@ -349,7 +354,8 @@ class RNApp extends Component {
           flex1: 1,
           flexDirection: 'row',
           alignItems: 'center',
-          height: 50,
+          justifyContent:'center',
+          height: Dimens.hpSix,
         }}>
         <View style={{flex: 1}}>
           <Text>Initial Price</Text>
@@ -357,45 +363,56 @@ class RNApp extends Component {
             placeholder="BA"
             containerStyle={{
               backgroundColor: '#F1F1F1',
-              flex: 1,
+              height:Dimens.hpThree,
               borderRadius: Dimens.wpTwo,
             }}
             inputContainerStyle={{
               borderBottomWidth: 0,
               backgroundColor: '#F1F1F1',
+              height:Dimens.hpThree,
               borderRadius: Dimens.wpTwo,
             }}
           />
         </View>
-        <View style={{flexDirection: 'row', flex: 1}}>
-          <Icon1 name="minus" size={Dimens.hpThree} color="#969696" />
+        <View style={{flex: 2,justifyContent:'center',alignItems:'center'}}>
+        <Text style={{color:'#E49B54'}}>Discount</Text>
+        <View style={{flexDirection: 'row',alignItems:'flex-end',paddingLeft:20,paddingRight:20}}>
+          <Icon1 name="minus" size={Dimens.hpTwo} color="#969696" />
           <Input
-            placeholder="BA"
+            placeholder="30%"
             containerStyle={{
               backgroundColor: '#F1F1F1',
               flex: 1,
+              height:Dimens.hpThree,
               borderRadius: Dimens.wpTwo,
+              marginLeft:10,
+              marginRight:10,
+              fontSize:10
             }}
             inputContainerStyle={{
               borderBottomWidth: 0,
               backgroundColor: '#F1F1F1',
+              height:Dimens.hpThree,
               borderRadius: Dimens.wpTwo,
+              fontSize:10
             }}
           />
-          <Icon1 name="plus" size={Dimens.hpThree} color="#969696" />
+          <Icon1 name="plus" size={Dimens.hpTwo} color="#969696" />
         </View>
-        <View style={{flex: 1}}>
+        </View>
+        <View style={{flex: 2}}>
           <Text>Price after discount</Text>
           <Input
             placeholder="BA"
             containerStyle={{
               backgroundColor: '#F1F1F1',
-              flex: 1,
               borderRadius: Dimens.wpTwo,
+              height:Dimens.hpThree,
             }}
             inputContainerStyle={{
               borderBottomWidth: 0,
               backgroundColor: '#F1F1F1',
+              height:Dimens.hpThree,
               borderRadius: Dimens.wpTwo,
             }}
           />

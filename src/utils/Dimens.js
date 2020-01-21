@@ -31,6 +31,7 @@ const Dimens = {
   hpOnePointSix: hp('1.6%'),
   hpOnePointSeven: hp('1.7%'),
   hpOnePointEight:hp('1.8%'),
+  hpPointZeroEight: hp('0.08%'),
   hpPointOne: hp('0.1%'),
   hpTwoPointFour: hp('2.4%'),
   hpThree: hp('3%'),
