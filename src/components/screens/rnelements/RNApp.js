@@ -1,6 +1,6 @@
 // Import libraries for making a component
 import React, {Component} from 'react';
-import {View, ScrollView, BackHandler,StyleSheet,} from 'react-native';
+import {View, ScrollView, BackHandler, StyleSheet} from 'react-native';
 
 import AppDialog from '../commonappui/appdialog/AppDialog';
 import ImagePicker from 'react-native-image-picker';
@@ -15,11 +15,11 @@ import networkUtils from '../../../utils/NetworkUtils';
 import Dimens from '../../../utils/Dimens';
 import AppFonts from '../../../utils/AppFonts';
 
-import {Button, Text, Input,TouchableOpacity} from 'react-native-elements';
+import {Button, Text, Input, TouchableOpacity} from 'react-native-elements';
 
 import {
   addStartIndex,
-  addStartIndexToScreenStack
+  addStartIndexToScreenStack,
 } from '../../../actions/index';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -27,6 +27,7 @@ import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon5 from 'react-native-vector-icons/FontAwesome5';
 import Autocomplete from 'react-native-autocomplete-input';
 
+import LinearGradient from 'react-native-linear-gradient';
 
 const API = 'https://swapi.co/api';
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
@@ -34,23 +35,24 @@ class RNApp extends Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       displaySV: 'flex',
       displayLayout: 0,
       modalVisible: false,
       films: [],
-      query: ''
+      query: '',
     };
   }
 
   renderFilm(film) {
-    const { title, director, opening_crawl, episode_id } = film;
+    const {title, director, opening_crawl, episode_id} = film;
     const roman = episode_id < ROMAN.length ? ROMAN[episode_id] : episode_id;
 
     return (
       <View>
-        <Text style={styles.titleText}>{roman}. {title}</Text>
+        <Text style={styles.titleText}>
+          {roman}. {title}
+        </Text>
         <Text style={styles.directorText}>({director})</Text>
         <Text style={styles.openingText}>{opening_crawl}</Text>
       </View>
@@ -62,7 +64,7 @@ class RNApp extends Component {
       return [];
     }
 
-    const { films } = this.state;
+    const {films} = this.state;
     const regex = new RegExp(`${query.trim()}`, 'i');
     return films.filter(film => film.title.search(regex) >= 0);
   }
@@ -73,9 +75,11 @@ class RNApp extends Component {
     startIndexArr.push(301);
     this.props.addStartIndexToStackData(startIndexArr);
 
-    fetch(`${API}/films/`).then(res => res.json()).then((json) => {
-        const { results: films } = json;
-        this.setState({ films });
+    fetch(`${API}/films/`)
+      .then(res => res.json())
+      .then(json => {
+        const {results: films} = json;
+        this.setState({films});
       });
 
     BackHandler.addEventListener('hardwareBackPress', this.backPressed);
@@ -111,7 +115,7 @@ class RNApp extends Component {
   }
 
   addAdTitleView() {
-    const { query } = this.state;
+    const {query} = this.state;
     const films = this.findFilm(query);
     const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
     return (
@@ -122,28 +126,28 @@ class RNApp extends Component {
         <View
           style={{
             flexDirection: 'row',
-            borderColor:'#999999',
+            borderColor: '#999999',
             borderWidth: Dimens.hpPointZeroEight,
             marginBottom: Dimens.hpSeven,
           }}></View>
         <Autocomplete
-          
           autoCapitalize="none"
           autoCorrect={false}
           style={styles.autocompleteContainer}
-        //   containerStyle={styles.autocompleteContainer}
+          //   containerStyle={styles.autocompleteContainer}
           inputContainerStyle={styles.autocompleteContainer}
           data={films.length === 1 && comp(query, films[0].title) ? [] : films}
           defaultValue={query}
-          onChangeText={text => this.setState({ query: text })}
+          onChangeText={text => this.setState({query: text})}
           placeholder="Add ad Title"
-          renderItem={({ title, release_date }) => (
-            <TouchableOpacity onPress={() => this.setState({ query: title })}>
+          renderItem={({title, release_date}) => (
+            <TouchableOpacity onPress={() => this.setState({query: title})}>
               <Text style={styles.itemText}>
                 {title} ({release_date.split('-')[0]})
               </Text>
             </TouchableOpacity>
-          )} />
+          )}
+        />
       </View>
     );
   }
@@ -155,7 +159,7 @@ class RNApp extends Component {
         path: 'images',
       },
     };
-    ImagePicker.launchImageLibrary(options, (response) => {
+    ImagePicker.launchImageLibrary(options, response => {
       console.log('Response = ', response);
 
       if (response.didCancel) {
@@ -166,21 +170,18 @@ class RNApp extends Component {
         console.log('User tapped custom button: ', response.customButton);
         alert(response.customButton);
       } else {
-        const source = { uri: response.uri };
+        const source = {uri: response.uri};
         console.log('response', JSON.stringify(response));
         this.setState({
           filePath: response,
           fileData: response.data,
-          fileUri: response.uri
+          fileUri: response.uri,
         });
       }
     });
-
-  }
-
+  };
 
   addArticleName() {
-    
     return (
       <View>
         <View
@@ -198,7 +199,7 @@ class RNApp extends Component {
         <View
           style={{
             flexDirection: 'row',
-            borderColor:'#999999',
+            borderColor: '#999999',
             borderWidth: Dimens.hpPointZeroEight,
             marginBottom: Dimens.hpTwo,
           }}></View>
@@ -228,8 +229,8 @@ class RNApp extends Component {
               height: Dimens.hpTen,
               borderRadius: Dimens.hpTen / 2,
             }}
-            onPress={()=>{
-                this.launchImageLibrary()
+            onPress={() => {
+              this.launchImageLibrary();
             }}
           />
         </View>
@@ -247,16 +248,14 @@ class RNApp extends Component {
           justifyContent: 'flex-end',
         }}>
         <Button
-          icon={
-            <Icon name="check" size={Dimens.hpTwo} color="white" />
-          }
+          icon={<Icon name="check" size={Dimens.hpTwo} color="white" />}
           title=""
-          ViewComponent={LinearGradient} 
+          ViewComponent={LinearGradient}
           linearGradientProps={{
-    colors: ['red', 'pink'],
-    start: { x: 0, y: 0.5 },
-    end: { x: 1, y: 0.5 },
-  }}
+            colors: ['#53746B', '#53A221'],
+            start: {x: 0, y: 0.5},
+            end: {x: 1, y: 0.5},
+          }}
           buttonStyle={{
             backgroundColor: '#53A221',
             width: Dimens.hpFive,
@@ -276,16 +275,24 @@ class RNApp extends Component {
           marginTop: Dimens.hpTwo,
           flex1: 1,
           flexDirection: 'row',
-          alignItems:'center',
-          justifyContent:'center',
-          height:Dimens.hpFive
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: Dimens.hpFive,
         }}>
         <View style={{flex: 1, flexDirection: 'column'}}>
           <Text>Availability Period</Text>
         </View>
-        <View style={{flexDirection: 'row', flex: 1.5,alignItems:'center',justifyContent:'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            flex: 1.5,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
           <Icon5 name="calendar-alt" size={Dimens.hpThree} color="#8AC1B2" />
-          <Text style={{marginLeft:Dimens.hpOne,marginRight:Dimens.hpOne}}>to</Text>
+          <Text style={{marginLeft: Dimens.hpOne, marginRight: Dimens.hpOne}}>
+            to
+          </Text>
           <Icon5 name="calendar-alt" size={Dimens.hpThree} color="#8AC1B2" />
         </View>
         <View style={{flex: 1, flexDirection: 'row'}}></View>
@@ -354,7 +361,7 @@ class RNApp extends Component {
           flex1: 1,
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent:'center',
+          justifyContent: 'center',
           height: Dimens.hpSix,
         }}>
         <View style={{flex: 1}}>
@@ -363,42 +370,48 @@ class RNApp extends Component {
             placeholder="BA"
             containerStyle={{
               backgroundColor: '#F1F1F1',
-              height:Dimens.hpThree,
+              height: Dimens.hpThree,
               borderRadius: Dimens.wpTwo,
             }}
             inputContainerStyle={{
               borderBottomWidth: 0,
               backgroundColor: '#F1F1F1',
-              height:Dimens.hpThree,
+              height: Dimens.hpThree,
               borderRadius: Dimens.wpTwo,
             }}
           />
         </View>
-        <View style={{flex: 2,justifyContent:'center',alignItems:'center'}}>
-        <Text style={{color:'#E49B54'}}>Discount</Text>
-        <View style={{flexDirection: 'row',alignItems:'flex-end',paddingLeft:20,paddingRight:20}}>
-          <Icon1 name="minus" size={Dimens.hpTwo} color="#969696" />
-          <Input
-            placeholder="30%"
-            containerStyle={{
-              backgroundColor: '#F1F1F1',
-              flex: 1,
-              height:Dimens.hpThree,
-              borderRadius: Dimens.wpTwo,
-              marginLeft:10,
-              marginRight:10,
-              fontSize:10
-            }}
-            inputContainerStyle={{
-              borderBottomWidth: 0,
-              backgroundColor: '#F1F1F1',
-              height:Dimens.hpThree,
-              borderRadius: Dimens.wpTwo,
-              fontSize:10
-            }}
-          />
-          <Icon1 name="plus" size={Dimens.hpTwo} color="#969696" />
-        </View>
+        <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{color: '#E49B54'}}>Discount</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              paddingLeft: 20,
+              paddingRight: 20,
+            }}>
+            <Icon1 name="minus" size={Dimens.hpTwo} color="#969696" />
+            <Input
+              placeholder="30%"
+              containerStyle={{
+                backgroundColor: '#F1F1F1',
+                flex: 1,
+                height: Dimens.hpThree,
+                borderRadius: Dimens.wpTwo,
+                marginLeft: 10,
+                marginRight: 10,
+                fontSize: 10,
+              }}
+              inputContainerStyle={{
+                borderBottomWidth: 0,
+                backgroundColor: '#F1F1F1',
+                height: Dimens.hpThree,
+                borderRadius: Dimens.wpTwo,
+                fontSize: 10,
+              }}
+            />
+            <Icon1 name="plus" size={Dimens.hpTwo} color="#969696" />
+          </View>
         </View>
         <View style={{flex: 2}}>
           <Text>Price after discount</Text>
@@ -407,12 +420,12 @@ class RNApp extends Component {
             containerStyle={{
               backgroundColor: '#F1F1F1',
               borderRadius: Dimens.wpTwo,
-              height:Dimens.hpThree,
+              height: Dimens.hpThree,
             }}
             inputContainerStyle={{
               borderBottomWidth: 0,
               backgroundColor: '#F1F1F1',
-              height:Dimens.hpThree,
+              height: Dimens.hpThree,
               borderRadius: Dimens.wpTwo,
             }}
           />
@@ -421,12 +434,10 @@ class RNApp extends Component {
     );
   }
 
-  addDescriptionLayout(){
-      return (
-        <View>
-        <Text style={{fontSize: Dimens.hpOnePointThree}}>
-          Description
-        </Text>
+  addDescriptionLayout() {
+    return (
+      <View>
+        <Text style={{fontSize: Dimens.hpOnePointThree}}>Description</Text>
         <Input
           placeholder=""
           containerStyle={{
@@ -440,9 +451,8 @@ class RNApp extends Component {
           }}
         />
       </View>
-      );
+    );
   }
-
 
   displayNormalLayout() {
     return (
@@ -502,48 +512,47 @@ class RNApp extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      backgroundColor: '#F5FCFF',
-      flex: 1,
-      paddingTop: 25
-    },
-    autocompleteContainer: {
-        backgroundColor: '#F1F1F1',
-        borderRadius: Dimens.wpTwo,
-        paddingLeft:Dimens.wpTwo,
-        height:Dimens.hpFour
-    },
-    itemText: {
-      fontSize: 15,
-      margin: 2
-    },
-    descriptionContainer: {
-      // `backgroundColor` needs to be set otherwise the
-      // autocomplete input will disappear on text input.
-      backgroundColor: '#F5FCFF',
-      marginTop: 8
-    },
-    infoText: {
-      textAlign: 'center'
-    },
-    titleText: {
-      fontSize: 18,
-      fontWeight: '500',
-      marginBottom: 10,
-      marginTop: 10,
-      textAlign: 'center'
-    },
-    directorText: {
-      color: 'grey',
-      fontSize: 12,
-      marginBottom: 10,
-      textAlign: 'center'
-    },
-    openingText: {
-      textAlign: 'center'
-    }
-  });
-  
+  container: {
+    backgroundColor: '#F5FCFF',
+    flex: 1,
+    paddingTop: 25,
+  },
+  autocompleteContainer: {
+    backgroundColor: '#F1F1F1',
+    borderRadius: Dimens.wpTwo,
+    paddingLeft: Dimens.wpTwo,
+    height: Dimens.hpFour,
+  },
+  itemText: {
+    fontSize: 15,
+    margin: 2,
+  },
+  descriptionContainer: {
+    // `backgroundColor` needs to be set otherwise the
+    // autocomplete input will disappear on text input.
+    backgroundColor: '#F5FCFF',
+    marginTop: 8,
+  },
+  infoText: {
+    textAlign: 'center',
+  },
+  titleText: {
+    fontSize: 18,
+    fontWeight: '500',
+    marginBottom: 10,
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  directorText: {
+    color: 'grey',
+    fontSize: 12,
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  openingText: {
+    textAlign: 'center',
+  },
+});
 
 const mapStateToProps = state => {
   PrintUtils.printLogWithClassName('Mapping Notification state', state);
