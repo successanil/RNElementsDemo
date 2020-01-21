@@ -130,7 +130,7 @@ class RNApp extends Component {
             borderWidth: Dimens.hpPointZeroEight,
             marginBottom: Dimens.hpSeven,
           }}></View>
-        <Autocomplete
+        {/* <Autocomplete
           autoCapitalize="none"
           autoCorrect={false}
           style={styles.autocompleteContainer}
@@ -147,7 +147,19 @@ class RNApp extends Component {
               </Text>
             </TouchableOpacity>
           )}
-        />
+        /> */}
+        <Input
+          placeholder="Add ad Title"
+          containerStyle={{
+            backgroundColor: '#F1F1F1',
+            borderRadius: Dimens.wpTwo,
+          }}
+          inputContainerStyle={{
+            borderBottomWidth: 0,
+            backgroundColor: '#F1F1F1',
+            borderRadius: Dimens.wpTwo,
+          }}
+          ></Input>
       </View>
     );
   }
@@ -212,6 +224,7 @@ class RNApp extends Component {
       <View
         style={{
           alignItems: 'center',
+          paddingTop:Dimens.hpTwo
         }}>
         <View
           style={{
@@ -234,7 +247,7 @@ class RNApp extends Component {
             }}
           />
         </View>
-        <Text style={{color: '#E49B54'}}>Upload image</Text>
+        <Text style={{marginTop:Dimens.hpOne,color: '#E49B54'}}>Upload image</Text>
       </View>
     );
   }
