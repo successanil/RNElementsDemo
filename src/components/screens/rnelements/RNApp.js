@@ -1,8 +1,9 @@
 // Import libraries for making a component
 import React, {Component} from 'react';
-import {View, ScrollView, BackHandler} from 'react-native';
+import {View, ScrollView, BackHandler,StyleSheet,} from 'react-native';
 
 import AppDialog from '../commonappui/appdialog/AppDialog';
+import ImagePicker from 'react-native-image-picker';
 
 const cc = require('../../../utils/ColorsContants');
 
@@ -14,65 +15,67 @@ import networkUtils from '../../../utils/NetworkUtils';
 import Dimens from '../../../utils/Dimens';
 import AppFonts from '../../../utils/AppFonts';
 
-import {Button, Text, Input} from 'react-native-elements';
+import {Button, Text, Input,TouchableOpacity} from 'react-native-elements';
 
 import {
   addStartIndex,
-  addStartIndexToScreenStack,
-  addNotificationTitleDataListToRedux,
-  addNotificationToastForCustomerDataList,
-  addNotificationOffersForCustomerDataList,
-  addNotificationOffersHeadersForCustomerDataList,
+  addStartIndexToScreenStack
 } from '../../../actions/index';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon5 from 'react-native-vector-icons/FontAwesome5';
+import Autocomplete from 'react-native-autocomplete-input';
 
+const API = 'https://swapi.co/api';
+const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 class RNApp extends Component {
   constructor(props) {
     super(props);
 
-    const dataSource = [
-      {
-        backgroundColor: '#FFF',
-        key: 'Events',
-        title: 'Events',
-        titleColor: cc.colorActiveTab,
-        profilepic:
-          'https://firebasestorage.googleapis.com/v0/b/rnfirebasedemo-a238a.appspot.com/o/profiles%2Fanil.jpg?alt=media&token=78b94b84-55df-4c7d-aa69-109c3753dfa0',
-      },
-      {
-        backgroundColor: '#f3f4f6',
-        key: 'Offers',
-        title: 'Offers',
-        titleColor: cc.colorInactiveTab,
-        profilepic:
-          'https://firebasestorage.googleapis.com/v0/b/rnfirebasedemo-a238a.appspot.com/o/profiles%2Fanil.jpg?alt=media&token=78b94b84-55df-4c7d-aa69-109c3753dfa0',
-      },
-      {
-        backgroundColor: '#f3f4f6',
-        key: 'Toast',
-        title: 'Toast',
-        titleColor: cc.colorInactiveTab,
-        profilepic:
-          'https://firebasestorage.googleapis.com/v0/b/rnfirebasedemo-a238a.appspot.com/o/profiles%2Fkittu.jpg?alt=media&token=7496b5dc-619b-4998-be97-73815d567b85',
-      },
-    ];
-    this.props.addNotificationTitleDataList(dataSource);
 
     this.state = {
       displaySV: 'flex',
       displayLayout: 0,
       modalVisible: false,
+      films: [],
+      query: ''
     };
   }
 
+  renderFilm(film) {
+    const { title, director, opening_crawl, episode_id } = film;
+    const roman = episode_id < ROMAN.length ? ROMAN[episode_id] : episode_id;
+
+    return (
+      <View>
+        <Text style={styles.titleText}>{roman}. {title}</Text>
+        <Text style={styles.directorText}>({director})</Text>
+        <Text style={styles.openingText}>{opening_crawl}</Text>
+      </View>
+    );
+  }
+
+  findFilm(query) {
+    if (query === '') {
+      return [];
+    }
+
+    const { films } = this.state;
+    const regex = new RegExp(`${query.trim()}`, 'i');
+    return films.filter(film => film.title.search(regex) >= 0);
+  }
+
   componentDidMount() {
-    this.props.addStartIndexToData(202); // screen number
+    this.props.addStartIndexToData(301); // screen number
     var startIndexArr = this.props.startIndexStack;
-    startIndexArr.push(202);
+    startIndexArr.push(301);
     this.props.addStartIndexToStackData(startIndexArr);
+
+    fetch(`${API}/films/`).then(res => res.json()).then((json) => {
+        const { results: films } = json;
+        this.setState({ films });
+      });
 
     BackHandler.addEventListener('hardwareBackPress', this.backPressed);
   }
@@ -107,6 +110,9 @@ class RNApp extends Component {
   }
 
   addAdTitleView() {
+    const { query } = this.state;
+    const films = this.findFilm(query);
+    const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
     return (
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
@@ -119,24 +125,61 @@ class RNApp extends Component {
             borderWidth: Dimens.hpPointOne,
             marginBottom: Dimens.hpSeven,
           }}></View>
-
-        <Input
-          placeholder=""
-          containerStyle={{
-            backgroundColor: '#F1F1F1',
-            borderRadius: Dimens.wpTwo,
-          }}
-          inputContainerStyle={{
-            borderBottomWidth: 0,
-            backgroundColor: '#F1F1F1',
-            borderRadius: Dimens.wpTwo,
-          }}
-        />
+        <Autocomplete
+          
+          autoCapitalize="none"
+          autoCorrect={false}
+          style={styles.autocompleteContainer}
+        //   containerStyle={styles.autocompleteContainer}
+          inputContainerStyle={styles.autocompleteContainer}
+          data={films.length === 1 && comp(query, films[0].title) ? [] : films}
+          defaultValue={query}
+          onChangeText={text => this.setState({ query: text })}
+          placeholder="Add ad Title"
+          renderItem={({ title, release_date }) => (
+            <TouchableOpacity onPress={() => this.setState({ query: title })}>
+              <Text style={styles.itemText}>
+                {title} ({release_date.split('-')[0]})
+              </Text>
+            </TouchableOpacity>
+          )} />
       </View>
     );
   }
 
+  launchImageLibrary = () => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.launchImageLibrary(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+        alert(response.customButton);
+      } else {
+        const source = { uri: response.uri };
+        console.log('response', JSON.stringify(response));
+        this.setState({
+          filePath: response,
+          fileData: response.data,
+          fileUri: response.uri
+        });
+      }
+    });
+
+  }
+
+
   addArticleName() {
+    
     return (
       <View>
         <View
@@ -183,6 +226,9 @@ class RNApp extends Component {
               width: Dimens.hpTen,
               height: Dimens.hpTen,
               borderRadius: Dimens.hpTen / 2,
+            }}
+            onPress={()=>{
+                this.launchImageLibrary()
             }}
           />
         </View>
@@ -433,6 +479,50 @@ class RNApp extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+    container: {
+      backgroundColor: '#F5FCFF',
+      flex: 1,
+      paddingTop: 25
+    },
+    autocompleteContainer: {
+        backgroundColor: '#F1F1F1',
+        borderRadius: Dimens.wpTwo,
+        paddingLeft:Dimens.wpTwo,
+        height:Dimens.hpFour
+    },
+    itemText: {
+      fontSize: 15,
+      margin: 2
+    },
+    descriptionContainer: {
+      // `backgroundColor` needs to be set otherwise the
+      // autocomplete input will disappear on text input.
+      backgroundColor: '#F5FCFF',
+      marginTop: 8
+    },
+    infoText: {
+      textAlign: 'center'
+    },
+    titleText: {
+      fontSize: 18,
+      fontWeight: '500',
+      marginBottom: 10,
+      marginTop: 10,
+      textAlign: 'center'
+    },
+    directorText: {
+      color: 'grey',
+      fontSize: 12,
+      marginBottom: 10,
+      textAlign: 'center'
+    },
+    openingText: {
+      textAlign: 'center'
+    }
+  });
+  
 
 const mapStateToProps = state => {
   PrintUtils.printLogWithClassName('Mapping Notification state', state);
