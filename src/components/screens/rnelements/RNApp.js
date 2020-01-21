@@ -168,10 +168,32 @@ class RNApp extends Component {
           icon={<Icon name="cloud-upload" size={Dimens.hpFive} color="white" />}
           title=""
           buttonStyle={{
-              backgroundColor:'#E49B54',
-              width:Dimens.hpTen,
-              height:Dimens.hpTen,
-              borderRadius:(Dimens.hpTen / 2)
+            backgroundColor: '#E49B54',
+            width: Dimens.hpTen,
+            height: Dimens.hpTen,
+            borderRadius: Dimens.hpTen / 2,
+          }}
+        />
+      </View>
+    );
+  }
+
+  addRightButton() {
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+        }}>
+        <Button
+          icon={<Icon name="check" size={Dimens.hpTwo} color="white" />}
+          title=""
+          buttonStyle={{
+            backgroundColor: '#53A221',
+            width: Dimens.hpFive,
+            height: Dimens.hpFive,
+            borderRadius: Dimens.hpFive / 2,
           }}
         />
       </View>
@@ -305,14 +327,7 @@ class RNApp extends Component {
                   <Button title="+" containerStyle={{flex: 1}} />
                 </View>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'flex-end',
-                }}>
-                <Button title="Right" />
-              </View>
+              {this.addRightButton()}
             </View>
           </View>
         </ScrollView>
