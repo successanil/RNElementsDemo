@@ -12,6 +12,7 @@ import {ThemeProvider} from 'react-native-elements';
 import {View} from 'react-native';
 import RNApp from './src/components/screens/rnelements/RNApp';
 const cc = require('./src/utils/ColorsContants');
+import Dimens from './src/utils/Dimens';
 const store = configureStore();
 
 const theme = {
@@ -20,6 +21,18 @@ const theme = {
   },
   Avatar: {
     size: 'large',
+  },
+  Text:{
+    style:{
+      fontSize:Dimens.hpOnePointThree,
+      color:'#969696'
+    }
+  },
+  Input:{
+    containerStyle:{
+      borderTopWidth:0.5,
+      borderColor:'#9B9B9B'
+    }
   }
 };
 
